@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>チャッピー＆サリーの思い込みに気づく時間</title>
+
+  <link rel="stylesheet" href="boss.css">
+  
+</head>
+
+<body>
+
+  <!-- 思い込みを見つける前の画面 -->
+  <div id="tarot-screen">
+
+    <div id="masterScreen">
+
+      <div class="title-wrap">
+        <div class="title-icon">🌿</div>
+
+        <h1>
+          チャッピー＆サリーの<br>
+          思い込みに気づく時間⏳️
+        </h1>
+
+        <div class="title-icon">🌿</div>
+      </div>
+
+      <img
+        src="https://raw.githubusercontent.com/Chappy-Sally/chappy-sally-images/main/covers/CS_hyousi.jpg"
+        class="header-img"
+        alt="チャッピー＆サリー"
+      >
+
+      <p class="desc">
+  今気になっていることや<br>
+  整理したい気持ちを入れてね😊<br>
+  うまく言葉にできなくても<br>
+  思いつくままで大丈夫です🌈
+      </p>
+
+      <!--
+        boss.jsとの互換性を保つために残しています。
+        画面には表示されません。
+      -->
+      <input
+        type="hidden"
+        id="clientName"
+        value=""
+      >
+
+      <input
+        id="question"
+        placeholder="今気になっていることを入れてね"
+      >
+
+      <div class="button-group">
+
+        <button
+          class="main-btn"
+          onclick="saveSessionInputs(); drawTarotOne()"
+        >
+          🂠 1枚引き
+        </button>
+
+        <button
+          class="main-btn"
+          onclick="saveSessionInputs(); drawTarotThree()"
+        >
+          🂠 3枚引き
+        </button>
+
+      </div>
+
+      <div class="button-group">
+
+        <button
+          class="boss-btn"
+          onclick="showBossScreen()"
+        >
+          🌿 思い込みを見つける
+        </button>
+
+      </div>
+
+      <div class="button-group">
+
+        <button
+          class="switch-btn"
+          onclick="location.href='switch.html'"
+        >
+          🌟 しあわせスイッチ 🌟
+        </button>
+
+      </div>
+
+      <p class="switch-note">
+        心に少し余裕ができたら<br>
+        押してみてね🤭🌈
+      </p>
+
+    </div>
+
+    <div class="button-group">
+
+      <button
+        class="orange-btn"
+        onclick="location.href='index.html'"
+      >
+        🏠 メニューにもどる
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- 思い込みカードを引く画面 -->
+  <div id="boss-screen" class="hidden">
+
+    <div class="title-wrap">
+
+      <div class="title-icon">🌱</div>
+
+      <h1>
+        心の守りに気づく
+      </h1>
+
+      <div class="title-icon">🌱</div>
+
+    </div>
+
+    <img
+      src="https://raw.githubusercontent.com/Chappy-Sally/chappy-sally-images/main/lassboss/boss_hyousi.png"
+      class="header-img"
+      alt="心の守りに気づく"
+      onerror="this.src='https://raw.githubusercontent.com/Chappy-Sally/chappy-sally-images/main/covers/CS_hyousi.jpg'"
+    >
+
+    <p class="desc">
+      今の心の奥にある<br>
+      思い込みや反応を<br>
+      やさしく見つけてみよう😊🌿
+    </p>
+
+    <div class="button-group">
+
+      <button
+        class="boss-btn"
+        onclick="saveSessionInputs(); drawBossOne()"
+      >
+        🂠 1枚引き
+      </button>
+
+      <button
+        class="boss-btn"
+        onclick="saveSessionInputs(); drawBossThree()"
+      >
+        🂠 3枚引き
+      </button>
+
+    </div>
+
+    <div class="button-group">
+
+      <button
+        class="orange-btn"
+        onclick="showTarotScreen()"
+      >
+        🌿 最初の画面へ戻る
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- 思い込みに気づいたあとの画面 -->
+  <div id="kami-screen" class="hidden">
+
+    <div class="title-wrap">
+
+      <div class="title-icon">✨</div>
+
+      <h1>
+        やさしい光のステージ
+      </h1>
+
+      <div class="title-icon">🌈</div>
+
+    </div>
+
+    <div class="kami-box">
+
+      <img
+        src="https://raw.githubusercontent.com/Chappy-Sally/chappy-sally-images/main/lassboss/boss_kami.png"
+        class="kami-img"
+        alt="チャッピーとサリー"
+        onerror="this.src='https://raw.githubusercontent.com/Chappy-Sally/chappy-sally-images/main/covers/CS_hyousi.jpg'"
+      >
+
+      <div class="kami-message">
+思い込みは
+
+あなたを守るために生まれた
+大切な心の反応😊🌿
+
+気づけたあなたは
+もう大丈夫🌈
+
+今のあなたで
+もう一度カードを引いてみよう🐾
+      </div>
+
+      <div class="kami-note">
+        10秒後に最初の画面へ移動します✨
+      </div>
+
+      <button
+        class="skip-btn"
+        onclick="skipToTarot()"
+      >
+        🐾 スキップ 🐾
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- 引いたカードとコピーボタンの表示場所 -->
+  <div
+    class="cards-area"
+    id="cards"
+  ></div>
+
+  <div id="summary-area"></div>
+
+
+  <script src="boss-prompts.js"></script>
+  <script src="boss.js"></script>
+
+</body>
+</html>
