@@ -79,6 +79,28 @@
 
     </div>
 
+<!-- 私が勝手に設定した役割 -->
+<div class="guide-box">
+
+  <div class="guide-title">
+    🎭 私が勝手に設定した役割
+  </div>
+
+  <div class="guide-text">
+    父・母・夫・子ども・上司・お金などに<br>
+    無意識に決めていた役割に気づいて<br>
+    別の視点からやさしく見直します😊
+  </div>
+
+  <button
+    class="btn-role"
+    onclick="location.href='roles.html'"
+  >
+    私が設定した役割を見てみる
+  </button>
+
+</div>
+    
 
     <!-- 2. チャッピーGPT -->
     <div class="guide-box">
@@ -93,11 +115,24 @@
       </div>
 
       <button
-        class="btn-chappy"
-        onclick="openChappyGPT()"
-      >
-        チャッピーGPTと話す
-      </button>
+  class="btn-chappy"
+  onclick="openChappyGPT()"
+>
+  チャッピーGPTと話す
+</button>
+
+<button
+  class="btn-chappy guide-btn"
+  onclick="toggleChappyGuide()"
+>
+  🐾 チャッピーGPTの使い方
+</button>
+
+<div
+  id="chappyGuide"
+  class="guide-image-wrap"
+  style="display:none;"
+>
 
     <button
   class="btn-chappy guide-btn"
