@@ -36,10 +36,28 @@ h1{
   color:#6b4b2a;
 }
 
+.app-subtitle{
+  margin:0 0 14px;
+  color:#6b4b2a;
+  line-height:1.6;
+  white-space:nowrap;
+  container-type:inline-size;
+}
+
+.app-subtitle span{
+  font-size:min(14px, 2.2vw);
+  font-size:min(14px, 2.8cqw);
+  font-weight:bold;
+  white-space:nowrap;
+}
+
 .hero-img{
   display:block;
   width:90%;
   max-width:460px;
+  aspect-ratio:1536 / 814;
+  object-fit:cover;
+  object-position:center;
   margin:16px auto 20px;
   border-radius:22px;
   box-shadow:0 8px 18px rgba(0,0,0,0.12);
