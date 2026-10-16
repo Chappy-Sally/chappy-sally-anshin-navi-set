@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>やさしいジャーナリング｜私にもどる総合ワークアプリ</title>
+
+  <link rel="stylesheet" href="bossindex.css">
+
+  <style>
+    .journal-intro{
+      width:92%;
+      max-width:500px;
+      margin:0 auto 18px;
+      color:#7b5b39;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    .journal-box{
+      width:92%;
+      max-width:500px;
+      margin:16px auto 0;
+      padding:18px 14px;
+      background:rgba(255,253,248,0.96);
+      border-radius:22px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.05);
+      text-align:left;
+    }
+
+    .journal-label{
+      display:block;
+      margin:0 0 10px;
+      color:#6b4b2a;
+      font-size:16px;
+      font-weight:bold;
+      line-height:1.6;
+    }
+
+    textarea{
+      width:100%;
+      min-height:130px;
+      resize:vertical;
+      border:2px solid #e7cfdd;
+      border-radius:18px;
+      padding:14px;
+      background:#fff;
+      color:#5b3a1e;
+      font-family:inherit;
+      font-size:16px;
+      line-height:1.7;
+      outline:none;
+    }
+
+    textarea:focus{
+      border-color:#b9a7df;
+      box-shadow:0 0 0 3px rgba(185,167,223,0.15);
+    }
+
+    .small-note{
+      width:92%;
+      max-width:500px;
+      margin:14px auto 0;
+      color:#9a7d69;
+      font-size:14px;
+      line-height:1.7;
+    }
+
+    .journal-actions{
+      margin-top:20px;
+    }
+
+    .btn-copy{
+      background:linear-gradient(
+        135deg,
+        #f6c86f,
+        #f2a0b9,
+        #b59ce8
+      );
+    }
+
+    .btn-reset{
+      background:linear-gradient(
+        135deg,
+        #b7c2d5,
+        #a8b2c8,
+        #9ea8bb
+      );
+    }
+
+    .btn-back{
+      background:linear-gradient(
+        135deg,
+        #8fd8c8,
+        #9fc8ff,
+        #b9afea
+      );
+    }
+
+    @media (max-width:480px){
+      .journal-intro,
+      .journal-box,
+      .small-note{
+        width:94%;
+      }
+
+      textarea{
+        min-height:115px;
+        font-size:15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="main-card">
+
+    <h1>📝 今日のやさしいジャーナリング</h1>
+
+    <p class="journal-intro">
+      正解を書かなくて大丈夫😊<br>
+      今浮かんだことを、そのまま書いてみてね。<br>
+      書きながら少しずつ自分の気持ちに戻っていこう🌿
+    </p>
+
+    <div class="journal-box">
+      <label class="journal-label" for="journal1">
+        ① 今日、手放していい役割や思い込みは？
+      </label>
+      <textarea
+        id="journal1"
+        placeholder="例：私が全部やらなきゃ、失敗しちゃいけない…"
+      ></textarea>
+    </div>
+
+    <div class="journal-box">
+      <label class="journal-label" for="journal2">
+        ② 本当はどうしたい？
+      </label>
+      <textarea
+        id="journal2"
+        placeholder="思いつくままで大丈夫😊"
+      ></textarea>
+    </div>
+
+    <div class="journal-box">
+      <label class="journal-label" for="journal3">
+        ③ 今の私が安心するために、何を選びたい？
+      </label>
+      <textarea
+        id="journal3"
+        placeholder="小さなことでも大丈夫🌈"
+      ></textarea>
+    </div>
+
+    <p class="small-note">
+      入力した内容は、この端末のブラウザ内に自動保存されます🌿
+    </p>
+
+    <div class="journal-actions">
+      <button class="btn-copy" onclick="copyJournal()">
+        今日のジャーナリングをコピー🐾
+      </button>
+
+      <button class="btn-reset" onclick="resetJournal()">
+        今日の内容をまっさらにする
+      </button>
+
+      <button class="btn-back" onclick="location.href='index.html'">
+        🏠 表紙に戻る
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    const journalIds = ["journal1", "journal2", "journal3"];
+
+    window.addEventListener("DOMContentLoaded", () => {
+      journalIds.forEach(id => {
+        const el = document.getElementById(id);
+        el.value = localStorage.getItem("set_" + id) || "";
+
+        el.addEventListener("input", () => {
+          localStorage.setItem("set_" + id, el.value);
+        });
+      });
+    });
+
+    function copyJournal(){
+      const j1 = document.getElementById("journal1").value.trim();
+      const j2 = document.getElementById("journal2").value.trim();
+      const j3 = document.getElementById("journal3").value.trim();
+
+      if(!j1 && !j2 && !j3){
+        alert("まずは今の気持ちを書いてみてね😊");
+        return;
+      }
+
+      const text =
+`【今日のやさしいジャーナリング】
+
+① 今日、手放していい役割や思い込みは？
+${j1 || "（未入力）"}
+
+② 本当はどうしたい？
+${j2 || "（未入力）"}
+
+③ 今の私が安心するために、何を選びたい？
+${j3 || "（未入力）"}
+
+この内容を、責めたり決めつけたりせず
+今の私の気持ちをやさしく整理するヒントとして受け取ります🌿`;
+
+      navigator.clipboard.writeText(text)
+        .then(() => alert("コピーしたよ🐾"))
+        .catch(() => alert("コピーできなかったので、もう一度試してね😊"));
+    }
+
+    function resetJournal(){
+      const ok = confirm("今日のジャーナリングをまっさらにする？");
+      if(!ok) return;
+
+      journalIds.forEach(id => {
+        const el = document.getElementById(id);
+        el.value = "";
+        localStorage.removeItem("set_" + id);
+      });
+
+      alert("まっさらにしたよ🌿");
+    }
+  </script>
+
+</body>
+</html>
