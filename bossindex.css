@@ -189,10 +189,11 @@ button:active{
 .btn-journal{
   background:linear-gradient(
     135deg,
-    #93d5bd,
-    #9fc8ee,
-    #c3a7e8
+    #b8e0c8,
+    #9fd6b4,
+    #86caa5
   );
+  color:#ffffff;
 }
 
 .guide-btn{
