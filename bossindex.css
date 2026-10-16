@@ -186,6 +186,15 @@ button:active{
   );
 }
 
+.btn-journal{
+  background:linear-gradient(
+    135deg,
+    #93d5bd,
+    #9fc8ee,
+    #c3a7e8
+  );
+}
+
 .guide-btn{
   margin-top:10px;
 }
