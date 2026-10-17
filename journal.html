@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="bossindex.css">
 
   <style>
+    .journal-title{
+      margin:0 0 18px;
+      font-size:clamp(17px, 4.5vw, 26px);
+      line-height:1.35;
+      white-space:nowrap;
+    }
+
     .journal-intro{
       width:92%;
       max-width:500px;
@@ -74,10 +81,21 @@
     .btn-copy{
       background:linear-gradient(
         135deg,
-        #f6c86f,
-        #f2a0b9,
-        #b59ce8
+        #5fbd8a,
+        #66c99b,
+        #78d0a5
       );
+      color:#ffffff;
+    }
+
+    .btn-chappy-copy{
+      background:linear-gradient(
+        135deg,
+        #55b982,
+        #63c99b,
+        #77d4aa
+      );
+      color:#ffffff;
     }
 
     .btn-reset{
@@ -117,12 +135,13 @@
 
   <div class="main-card">
 
-    <h1>📝 今日のやさしいジャーナリング</h1>
+    <h1 class="journal-title">📝 今日のやさしいジャーナリング</h1>
 
     <p class="journal-intro">
       正解を書かなくて大丈夫😊<br>
       今浮かんだことを、そのまま書いてみてね。<br>
-      書きながら少しずつ自分の気持ちに戻っていこう🌿
+      書きながら少しずつ<br>
+      自分の気持ちに戻っていこう🌿
     </p>
 
     <div class="journal-box">
@@ -160,6 +179,10 @@
     </p>
 
     <div class="journal-actions">
+      <button class="btn-chappy-copy" onclick="copyAndOpenChappy()">
+        コピーしてチャッピーGPTと話す🐶
+      </button>
+
       <button class="btn-copy" onclick="copyJournal()">
         今日のジャーナリングをコピー🐾
       </button>
@@ -189,18 +212,16 @@
       });
     });
 
-    function copyJournal(){
+    function buildJournalText(){
       const j1 = document.getElementById("journal1").value.trim();
       const j2 = document.getElementById("journal2").value.trim();
       const j3 = document.getElementById("journal3").value.trim();
 
       if(!j1 && !j2 && !j3){
-        alert("まずは今の気持ちを書いてみてね😊");
-        return;
+        return "";
       }
 
-      const text =
-`【今日のやさしいジャーナリング】
+      return `【今日のやさしいジャーナリング】
 
 ① 今日、手放していい役割や思い込みは？
 ${j1 || "（未入力）"}
@@ -212,10 +233,38 @@ ${j2 || "（未入力）"}
 ${j3 || "（未入力）"}
 
 この内容を、責めたり決めつけたりせず
-今の私の気持ちをやさしく整理するヒントとして受け取ります🌿`;
+今の私の気持ちをやさしく整理してください🌿`;
+    }
+
+    function copyJournal(){
+      const text = buildJournalText();
+
+      if(!text){
+        alert("まずは今の気持ちを書いてみてね😊");
+        return;
+      }
 
       navigator.clipboard.writeText(text)
         .then(() => alert("コピーしたよ🐾"))
+        .catch(() => alert("コピーできなかったので、もう一度試してね😊"));
+    }
+
+    function copyAndOpenChappy(){
+      const text = buildJournalText();
+
+      if(!text){
+        alert("まずは今の気持ちを書いてみてね😊");
+        return;
+      }
+
+      const chappyGptUrl =
+        "https://chatgpt.com/g/g-6a521739bdc08191be5387b1993ba520-tiyatuhigpt";
+
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          alert("コピーしたよ🐾\nチャッピーGPTを開くね😊");
+          window.open(chappyGptUrl, "_blank", "noopener,noreferrer");
+        })
         .catch(() => alert("コピーできなかったので、もう一度試してね😊"));
     }
 
